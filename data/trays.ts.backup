@@ -1,0 +1,1993 @@
+import { Tray } from '@/types'
+
+export const trays: Tray[] = [
+  {
+    id: 'documents',
+    name: 'Documents',
+    description: 'Merge, compress, and extract files',
+    icon: '📂',
+    color: 'blue',
+    tools: [
+      {
+        id: 'pdf-merge',
+        name: 'PDF Merge',
+        description: 'Upload PDFs → Preview order → Drag & drop reorder → Merge → Download',
+        icon: '🔗',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'reorder-mode',
+            name: 'Reorder Mode',
+            type: 'select',
+            defaultValue: 'drag',
+            options: ['drag', 'name', 'date']
+          },
+          {
+            id: 'insert-blank-pages',
+            name: 'Insert Blank Pages',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'output-mode',
+            name: 'Output Mode',
+            type: 'select',
+            defaultValue: 'single',
+            options: ['single', 'sections']
+          }
+        ]
+      },
+      {
+        id: 'pdf-split',
+        name: 'PDF Split',
+        description: 'Upload PDF → Select by pages/range/odd-even → Split → Download',
+        icon: '✂️',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'split-mode',
+            name: 'Split Mode',
+            type: 'select',
+            defaultValue: 'page-range',
+            options: ['page-range', 'odd-even', 'custom-intervals']
+          },
+          {
+            id: 'page-range',
+            name: 'Page Range',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'e.g., 1-3, 5, 7-9'
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'pdf',
+            options: ['pdf', 'images']
+          }
+        ]
+      },
+      {
+        id: 'pdf-compress',
+        name: 'PDF Compress',
+        description: 'Upload PDF → Choose compression level → Compress → Download',
+        icon: '🗜️',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'compression-level',
+            name: 'Compression Level',
+            type: 'select',
+            defaultValue: 'balanced',
+            options: ['high-quality', 'balanced', 'max-compression']
+          },
+          {
+            id: 'batch-mode',
+            name: 'Batch Compression',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'pdf-unlock',
+        name: 'PDF Unlock',
+        description: 'Upload password-protected PDF → Remove restrictions → Download',
+        icon: '🔓',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'password-input',
+            name: 'Password (if known)',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'Enter password if you know it'
+          },
+          {
+            id: 'brute-force',
+            name: 'Brute Force (if unknown)',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'pdf',
+            options: ['pdf', 'docx']
+          }
+        ]
+      },
+      {
+        id: 'pdf-protect',
+        name: 'PDF Protect',
+        description: 'Upload PDF → Set password & permissions → Download protected PDF',
+        icon: '🔐',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'password',
+            name: 'Password',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'Enter password'
+          },
+          {
+            id: 'permissions',
+            name: 'Permissions',
+            type: 'select',
+            defaultValue: 'print-copy',
+            options: ['print-copy', 'print-only', 'no-print', 'full-access']
+          },
+          {
+            id: 'encryption-level',
+            name: 'Encryption Level',
+            type: 'select',
+            defaultValue: '128-bit',
+            options: ['128-bit', '256-bit']
+          }
+        ]
+      },
+      {
+        id: 'pdf-rotate',
+        name: 'PDF Rotate',
+        description: 'Upload PDF → Page thumbnails with rotate buttons → Rotate → Download',
+        icon: '🔄',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'rotation-angle',
+            name: 'Rotation Angle',
+            type: 'select',
+            defaultValue: '90',
+            options: ['90', '180', '270']
+          },
+          {
+            id: 'apply-to-all',
+            name: 'Apply to All Pages',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'preview-changes',
+            name: 'Preview Changes',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'pdf-reorder',
+        name: 'PDF Reorder Pages',
+        description: 'Upload PDF → Drag-drop thumbnails → Save → Download',
+        icon: '📋',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'thumbnail-size',
+            name: 'Thumbnail Size',
+            type: 'select',
+            defaultValue: 'medium',
+            options: ['small', 'medium', 'large']
+          },
+          {
+            id: 'show-page-numbers',
+            name: 'Show Page Numbers',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'undo-redo',
+            name: 'Undo/Redo Support',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'pdf-extract',
+        name: 'PDF Extract Pages',
+        description: 'Upload PDF → Select pages (multi-select) → Extract → Download',
+        icon: '✂️',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'page-range',
+            name: 'Page Range',
+            type: 'input',
+            defaultValue: '1-3',
+            placeholder: 'e.g., 1-3, 5, 7-9'
+          },
+          {
+            id: 'extract-format',
+            name: 'Extract Format',
+            type: 'select',
+            defaultValue: 'pdf',
+            options: ['pdf', 'images']
+          },
+          {
+            id: 'delete-mode',
+            name: 'Delete Instead of Extract',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'pdf-watermark',
+        name: 'PDF Watermark',
+        description: 'Upload PDF → Add text/image watermark → Download',
+        icon: '💧',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'watermark-type',
+            name: 'Watermark Type',
+            type: 'select',
+            defaultValue: 'text',
+            options: ['text', 'image']
+          },
+          {
+            id: 'watermark-text',
+            name: 'Watermark Text',
+            type: 'input',
+            defaultValue: 'DRAFT',
+            placeholder: 'Enter watermark text'
+          },
+          {
+            id: 'watermark-opacity',
+            name: 'Opacity',
+            type: 'slider',
+            defaultValue: 50,
+            min: 10,
+            max: 100,
+            step: 5
+          },
+          {
+            id: 'watermark-position',
+            name: 'Position',
+            type: 'select',
+            defaultValue: 'center',
+            options: ['top-left', 'top-center', 'top-right', 'center', 'bottom-left', 'bottom-center', 'bottom-right']
+          }
+        ]
+      },
+      {
+        id: 'pdf-edit',
+        name: 'PDF Edit (Basic)',
+        description: 'Upload PDF → Tools: add text, highlight, draw, shapes → Save → Download',
+        icon: '✏️',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'edit-tools',
+            name: 'Edit Tools',
+            type: 'select',
+            defaultValue: 'all',
+            options: ['text', 'highlight', 'draw', 'shapes', 'all']
+          },
+          {
+            id: 'preserve-original',
+            name: 'Preserve Original',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'auto-save',
+            name: 'Auto Save',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'pdf-e-sign',
+        name: 'PDF E-Sign',
+        description: 'Upload PDF → Add signature → Place on PDF → Download signed PDF',
+        icon: '✍️',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'signature-type',
+            name: 'Signature Type',
+            type: 'select',
+            defaultValue: 'typed',
+            options: ['typed', 'drawn', 'uploaded']
+          },
+          {
+            id: 'signature-position',
+            name: 'Signature Position',
+            type: 'select',
+            defaultValue: 'auto',
+            options: ['auto', 'custom', 'multiple']
+          },
+          {
+            id: 'certificate-verification',
+            name: 'Certificate Verification',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-word',
+        name: 'PDF to Word',
+        description: 'Upload PDF → Choose output format (DOCX, DOC) → OCR option → Download Word',
+        icon: '📄',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'docx',
+            options: ['docx', 'doc']
+          },
+          {
+            id: 'ocr-option',
+            name: 'OCR Option',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'page-range',
+            name: 'Page Range',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'e.g., 1-3, 5, 7-9'
+          }
+        ]
+      },
+      {
+        id: 'word-to-pdf',
+        name: 'Word to PDF',
+        description: 'Upload Word → Convert to PDF (auto format preserve) → Download PDF',
+        icon: '📝',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'page-size',
+            name: 'Page Size',
+            type: 'select',
+            defaultValue: 'a4',
+            options: ['a4', 'letter', 'legal', 'a3']
+          },
+          {
+            id: 'orientation',
+            name: 'Orientation',
+            type: 'select',
+            defaultValue: 'portrait',
+            options: ['portrait', 'landscape']
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-excel',
+        name: 'PDF to Excel',
+        description: 'Upload PDF → Detect tables → export XLSX → OCR option → Download Excel',
+        icon: '📊',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'extract-tables',
+            name: 'Extract Tables',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'ocr-option',
+            name: 'OCR Option',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'table-detection',
+            name: 'Table Detection',
+            type: 'select',
+            defaultValue: 'auto',
+            options: ['auto', 'manual', 'enhanced']
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'xlsx',
+            options: ['xlsx', 'csv']
+          }
+        ]
+      },
+      {
+        id: 'excel-to-pdf',
+        name: 'Excel to PDF',
+        description: 'Upload Excel → Keep formatting/print-ready toggle → Download PDF',
+        icon: '📈',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'print-ready',
+            name: 'Print Ready',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'fit-to-page',
+            name: 'Fit to Page',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'include-gridlines',
+            name: 'Include Gridlines',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-powerpoint',
+        name: 'PDF to PowerPoint',
+        description: 'Upload PDF → Convert slides → OCR option → Download PPTX',
+        icon: '📽️',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'ocr-option',
+            name: 'OCR Option',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'slide-detection',
+            name: 'Slide Detection',
+            type: 'select',
+            defaultValue: 'auto',
+            options: ['auto', 'manual', 'enhanced']
+          },
+          {
+            id: 'preserve-layout',
+            name: 'Preserve Layout',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'pptx',
+            options: ['pptx', 'ppt']
+          }
+        ]
+      },
+      {
+        id: 'powerpoint-to-pdf',
+        name: 'PowerPoint to PDF',
+        description: 'Upload PPT → Convert all slides into PDF → Download PDF',
+        icon: '📊',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'slide-range',
+            name: 'Slide Range',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'e.g., 1-5, 7, 9-12'
+          },
+          {
+            id: 'preserve-animations',
+            name: 'Preserve Animations',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'handouts-mode',
+            name: 'Handouts Mode',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'quality',
+            name: 'Quality',
+            type: 'select',
+            defaultValue: 'high',
+            options: ['low', 'medium', 'high']
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-images',
+        name: 'PDF to Images',
+        description: 'Upload PDF → Export all/selected pages → Single images/ZIP → Download JPG/PNG',
+        icon: '🖼️',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'export-mode',
+            name: 'Export Mode',
+            type: 'select',
+            defaultValue: 'all-pages',
+            options: ['all-pages', 'selected-pages', 'page-range']
+          },
+          {
+            id: 'page-range',
+            name: 'Page Range',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'e.g., 1-3, 5, 7-9'
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'png',
+            options: ['png', 'jpg', 'webp']
+          },
+          {
+            id: 'zip-output',
+            name: 'ZIP Output',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'image-quality',
+            name: 'Image Quality',
+            type: 'slider',
+            defaultValue: 90,
+            min: 50,
+            max: 100,
+            step: 5
+          }
+        ]
+      },
+      {
+        id: 'images-to-pdf',
+        name: 'Images to PDF',
+        description: 'Upload single/multiple images → Page size/orientation options → Merge → Download PDF',
+        icon: '📷',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'page-size',
+            name: 'Page Size',
+            type: 'select',
+            defaultValue: 'a4',
+            options: ['a4', 'letter', 'fit-to-image', 'custom']
+          },
+          {
+            id: 'orientation',
+            name: 'Orientation',
+            type: 'select',
+            defaultValue: 'portrait',
+            options: ['portrait', 'landscape']
+          },
+          {
+            id: 'merge-mode',
+            name: 'Merge Mode',
+            type: 'select',
+            defaultValue: 'single',
+            options: ['single', 'separate']
+          },
+          {
+            id: 'image-quality',
+            name: 'Image Quality',
+            type: 'slider',
+            defaultValue: 90,
+            min: 50,
+            max: 100,
+            step: 5
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-text',
+        name: 'PDF to Text',
+        description: 'Upload PDF → OCR on/off → Extract plain text → Download TXT',
+        icon: '📝',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'ocr-enabled',
+            name: 'OCR Enabled',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'extract-mode',
+            name: 'Extract Mode',
+            type: 'select',
+            defaultValue: 'all-text',
+            options: ['all-text', 'selected-pages', 'page-range']
+          },
+          {
+            id: 'page-range',
+            name: 'Page Range',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'e.g., 1-3, 5, 7-9'
+          },
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'text-to-pdf',
+        name: 'Text to PDF',
+        description: 'Upload .txt → Options: font, size, margins → Download PDF',
+        icon: '📄',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'font-family',
+            name: 'Font Family',
+            type: 'select',
+            defaultValue: 'arial',
+            options: ['arial', 'times', 'courier', 'helvetica']
+          },
+          {
+            id: 'font-size',
+            name: 'Font Size',
+            type: 'slider',
+            defaultValue: 12,
+            min: 8,
+            max: 24,
+            step: 1
+          },
+          {
+            id: 'margins',
+            name: 'Margins',
+            type: 'select',
+            defaultValue: 'normal',
+            options: ['narrow', 'normal', 'wide']
+          },
+          {
+            id: 'page-size',
+            name: 'Page Size',
+            type: 'select',
+            defaultValue: 'a4',
+            options: ['a4', 'letter', 'legal']
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-html',
+        name: 'PDF to HTML',
+        description: 'Upload PDF → Extract as HTML with CSS inline/external toggle → Download HTML/ZIP',
+        icon: '🌐',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'css-mode',
+            name: 'CSS Mode',
+            type: 'select',
+            defaultValue: 'inline',
+            options: ['inline', 'external', 'both']
+          },
+          {
+            id: 'include-images',
+            name: 'Include Images',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'preserve-layout',
+            name: 'Preserve Layout',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'zip-output',
+            name: 'ZIP Output',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'html-to-pdf',
+        name: 'HTML to PDF',
+        description: 'Upload HTML or paste URL → Convert web page → PDF → Options: CSS/images or text only',
+        icon: '📄',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'include-css',
+            name: 'Include CSS',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'include-images',
+            name: 'Include Images',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'wait-for-loading',
+            name: 'Wait for Loading',
+            type: 'slider',
+            defaultValue: 2,
+            min: 0,
+            max: 10,
+            step: 1
+          },
+          {
+            id: 'page-size',
+            name: 'Page Size',
+            type: 'select',
+            defaultValue: 'a4',
+            options: ['a4', 'letter', 'legal', 'a3']
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-markdown',
+        name: 'PDF to Markdown',
+        description: 'Upload PDF → Extract text + formatting → .md → Download .md',
+        icon: '📝',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'include-headers',
+            name: 'Include Headers',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'include-lists',
+            name: 'Include Lists',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'markdown-style',
+            name: 'Markdown Style',
+            type: 'select',
+            defaultValue: 'standard',
+            options: ['standard', 'github', 'gitlab']
+          }
+        ]
+      },
+      {
+        id: 'markdown-to-pdf',
+        name: 'Markdown to PDF',
+        description: 'Upload .md → Render with simple style/theme selector → Download PDF',
+        icon: '📄',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'theme',
+            name: 'Theme',
+            type: 'select',
+            defaultValue: 'default',
+            options: ['default', 'github', 'dark', 'minimal']
+          },
+          {
+            id: 'include-toc',
+            name: 'Include Table of Contents',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'page-size',
+            name: 'Page Size',
+            type: 'select',
+            defaultValue: 'a4',
+            options: ['a4', 'letter', 'legal']
+          },
+          {
+            id: 'custom-css',
+            name: 'Custom CSS',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'Custom CSS styles'
+          }
+        ]
+      },
+      {
+        id: 'word-to-excel',
+        name: 'Word ↔ Excel',
+        description: 'Upload Word/Excel → Convert tables/text accordingly → Download',
+        icon: '📊',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'conversion-direction',
+            name: 'Conversion Direction',
+            type: 'select',
+            defaultValue: 'word-to-excel',
+            options: ['word-to-excel', 'excel-to-word']
+          },
+          {
+            id: 'extract-tables',
+            name: 'Extract Tables',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'xlsx',
+            options: ['xlsx', 'csv', 'docx']
+          }
+        ]
+      },
+      {
+        id: 'word-to-powerpoint',
+        name: 'Word ↔ PowerPoint',
+        description: 'Upload Word → create slides from headings → Upload PPT → convert slide text to Word',
+        icon: '📽️',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'conversion-direction',
+            name: 'Conversion Direction',
+            type: 'select',
+            defaultValue: 'word-to-powerpoint',
+            options: ['word-to-powerpoint', 'powerpoint-to-word']
+          },
+          {
+            id: 'slide-layout',
+            name: 'Slide Layout',
+            type: 'select',
+            defaultValue: 'title-content',
+            options: ['title-content', 'title-only', 'section-header']
+          },
+          {
+            id: 'include-images',
+            name: 'Include Images',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'pptx',
+            options: ['pptx', 'ppt', 'docx']
+          }
+        ]
+      },
+      {
+        id: 'excel-to-powerpoint',
+        name: 'Excel ↔ PowerPoint',
+        description: 'Upload Excel (charts/tables) → convert to PPT → Upload PPT (tables) → Excel',
+        icon: '📊',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'conversion-direction',
+            name: 'Conversion Direction',
+            type: 'select',
+            defaultValue: 'excel-to-powerpoint',
+            options: ['excel-to-powerpoint', 'powerpoint-to-excel']
+          },
+          {
+            id: 'include-charts',
+            name: 'Include Charts',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'table-formatting',
+            name: 'Table Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'pptx',
+            options: ['pptx', 'ppt', 'xlsx']
+          }
+        ]
+      },
+      {
+        id: 'image-to-word',
+        name: 'Image to Word',
+        description: 'Upload JPG/PNG → OCR text → editable Word → Download DOCX',
+        icon: '📝',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'ocr-language',
+            name: 'OCR Language',
+            type: 'select',
+            defaultValue: 'eng',
+            options: ['eng', 'fra', 'deu', 'spa', 'chi', 'jpn']
+          },
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'confidence-threshold',
+            name: 'Confidence Threshold',
+            type: 'slider',
+            defaultValue: 80,
+            min: 50,
+            max: 100,
+            step: 5
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'docx',
+            options: ['docx', 'doc', 'txt']
+          }
+        ]
+      },
+      {
+        id: 'image-to-excel',
+        name: 'Image to Excel',
+        description: 'Upload JPG/PNG → OCR tables → Excel sheet → Download XLSX',
+        icon: '📊',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'ocr-language',
+            name: 'OCR Language',
+            type: 'select',
+            defaultValue: 'eng',
+            options: ['eng', 'fra', 'deu', 'spa', 'chi', 'jpn']
+          },
+          {
+            id: 'table-detection',
+            name: 'Table Detection',
+            type: 'select',
+            defaultValue: 'auto',
+            options: ['auto', 'manual', 'enhanced']
+          },
+          {
+            id: 'preserve-structure',
+            name: 'Preserve Structure',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'xlsx',
+            options: ['xlsx', 'csv']
+          }
+        ]
+      },
+      {
+        id: 'image-to-text',
+        name: 'Image to Text',
+        description: 'Upload JPG/PNG → OCR → plain TXT → Download TXT',
+        icon: '📝',
+        trayId: 'documents',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'ocr-language',
+            name: 'OCR Language',
+            type: 'select',
+            defaultValue: 'eng',
+            options: ['eng', 'fra', 'deu', 'spa', 'chi', 'jpn']
+          },
+          {
+            id: 'preserve-formatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'confidence-threshold',
+            name: 'Confidence Threshold',
+            type: 'slider',
+            defaultValue: 80,
+            min: 50,
+            max: 100,
+            step: 5
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'txt',
+            options: ['txt', 'docx', 'pdf']
+          }
+        ]
+      },
+      {
+        id: 'image-to-html',
+        name: 'Image to HTML',
+        description: 'Upload JPG/PNG → OCR text → HTML + inline images → Download HTML',
+        icon: '🌐',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'ocr-language',
+            name: 'OCR Language',
+            type: 'select',
+            defaultValue: 'eng',
+            options: ['eng', 'fra', 'deu', 'spa', 'chi', 'jpn']
+          },
+          {
+            id: 'include-images',
+            name: 'Include Images',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'html-structure',
+            name: 'HTML Structure',
+            type: 'select',
+            defaultValue: 'semantic',
+            options: ['semantic', 'div-based', 'minimal']
+          },
+          {
+            id: 'css-styling',
+            name: 'CSS Styling',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'pdf-to-office',
+        name: 'PDF to Office',
+        description: 'Convert PDFs to Word or Excel with table extraction',
+        icon: '📄',
+        trayId: 'documents',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'outputFormat',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'docx',
+            options: ['docx', 'xlsx']
+          },
+          {
+            id: 'extractTables',
+            name: 'Extract Tables',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'preserveFormatting',
+            name: 'Preserve Formatting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'pageRange',
+            name: 'Page Range',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'e.g., 1-3, 5, 7-9'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'data',
+    name: 'Data',
+    description: 'Convert and format data files',
+    icon: '📊',
+    color: 'green',
+    tools: [
+      {
+        id: 'excel-to-csv',
+        name: 'Excel → CSV',
+        description: 'Upload XLS/XLSX → Choose sheet → Convert → Download CSV',
+        icon: '📈',
+        trayId: 'data',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'sheet-selection',
+            name: 'Sheet Selection',
+            type: 'select',
+            defaultValue: 'first',
+            options: ['first', 'all', 'custom']
+          },
+          {
+            id: 'delimiter',
+            name: 'Delimiter',
+            type: 'select',
+            defaultValue: 'comma',
+            options: ['comma', 'tab', 'semicolon']
+          },
+          {
+            id: 'formula-mode',
+            name: 'Formula Mode',
+            type: 'select',
+            defaultValue: 'values',
+            options: ['formulas', 'values']
+          }
+        ]
+      },
+      {
+        id: 'csv-to-excel',
+        name: 'CSV → Excel',
+        description: 'Upload CSV → Convert → Download XLSX',
+        icon: '🔄',
+        trayId: 'data',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'auto-detect-delimiter',
+            name: 'Auto-detect Delimiter',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'encoding',
+            name: 'Encoding',
+            type: 'select',
+            defaultValue: 'utf-8',
+            options: ['utf-8', 'iso-8859-1']
+          },
+          {
+            id: 'single-sheet',
+            name: 'Single Sheet Output',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        description: 'Paste/upload JSON → Pretty print & validate → Copy/download',
+        icon: '✨',
+        trayId: 'data',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'format-mode',
+            name: 'Format Mode',
+            type: 'select',
+            defaultValue: 'beautify',
+            options: ['beautify', 'minify']
+          },
+          {
+            id: 'error-highlighting',
+            name: 'Error Highlighting',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'convert-to-csv',
+            name: 'Convert to CSV',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'excel-cleaner',
+        name: 'Excel Cleaner',
+        description: 'Upload Excel → Remove duplicates & normalize → Clean → Download',
+        icon: '🧹',
+        trayId: 'data',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'remove-duplicates',
+            name: 'Remove Duplicates',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'normalize-columns',
+            name: 'Normalize Columns',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'fix-data-types',
+            name: 'Fix Data Types',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'remove-empty-rows',
+            name: 'Remove Empty Rows',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'trim-whitespace',
+            name: 'Trim Whitespace',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'sql-formatter',
+        name: 'SQL Formatter',
+        description: 'Paste SQL → Beautify with options → Download formatted code',
+        icon: '💻',
+        trayId: 'data',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'indentation',
+            name: 'Indentation',
+            type: 'select',
+            defaultValue: '2spaces',
+            options: ['2spaces', '4spaces', 'tabs']
+          },
+          {
+            id: 'caseStyle',
+            name: 'Case Style',
+            type: 'select',
+            defaultValue: 'capitalize',
+            options: ['lowercase', 'uppercase', 'capitalize']
+          },
+          {
+            id: 'alignKeywords',
+            name: 'Align Keywords',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'alignOperators',
+            name: 'Align Operators',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'removeComments',
+            name: 'Remove Comments',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'media',
+    name: 'Media',
+    description: 'Process images and media files',
+    icon: '🎨',
+    color: 'purple',
+    tools: [
+      {
+        id: 'image-compression',
+        name: 'Image Compression',
+        description: 'Upload image(s) → Choose quality level → Compress → Download',
+        icon: '🗜️',
+        trayId: 'media',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'quality-level',
+            name: 'Quality Level',
+            type: 'select',
+            defaultValue: 'balanced',
+            options: ['high-quality', 'balanced', 'smallest-size']
+          },
+          {
+            id: 'batch-mode',
+            name: 'Batch Compression',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'show-comparison',
+            name: 'Show Before/After',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'format-conversion',
+        name: 'Format Conversion',
+        description: 'Upload → Pick target format (JPG, PNG, WebP, SVG, PDF) → Convert → Download',
+        icon: '🔄',
+        trayId: 'media',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'target-format',
+            name: 'Target Format',
+            type: 'select',
+            defaultValue: 'webp',
+            options: ['jpg', 'png', 'webp', 'svg', 'pdf']
+          },
+          {
+            id: 'batch-convert',
+            name: 'Batch Convert',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'resize-dimensions',
+            name: 'Resize Dimensions',
+            type: 'input',
+            defaultValue: ''
+          },
+          {
+            id: 'background-removal',
+            name: 'Background Removal',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'ocr-extraction',
+        name: 'OCR (Text Extraction)',
+        description: 'Upload image or PDF → Select language → Extract → Copy/download text',
+        icon: '📝',
+        trayId: 'media',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'language',
+            name: 'Language',
+            type: 'select',
+            defaultValue: 'eng',
+            options: ['eng', 'fra', 'deu', 'spa', 'chi', 'jpn']
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'txt',
+            options: ['txt', 'word', 'pdf']
+          },
+          {
+            id: 'side-by-side',
+            name: 'Side-by-side View',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'background-removal',
+        name: 'Background Removal',
+        description: 'Upload image → AI-powered background removal → Download transparent image',
+        icon: '🎭',
+        trayId: 'media',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'tolerance',
+            name: 'Detection Tolerance',
+            type: 'slider',
+            defaultValue: 50,
+            min: 0,
+            max: 100,
+            step: 5
+          },
+          {
+            id: 'featherEdges',
+            name: 'Feather Edges',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'outputFormat',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'png',
+            options: ['png', 'jpg', 'webp']
+          },
+          {
+            id: 'quality',
+            name: 'Quality',
+            type: 'slider',
+            defaultValue: 90,
+            min: 1,
+            max: 100,
+            step: 1
+          },
+          {
+            id: 'preserveShadows',
+            name: 'Preserve Shadows',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'web',
+    name: 'Web',
+    description: 'Web development and content tools',
+    icon: '🌐',
+    color: 'orange',
+    tools: [
+      {
+        id: 'html-to-markdown',
+        name: 'HTML → Markdown',
+        description: 'Paste HTML/upload file → Convert → Copy/download Markdown',
+        icon: '📝',
+        trayId: 'web',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'keep-images',
+            name: 'Keep Images',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'preserve-styles',
+            name: 'Preserve Inline Styles',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'text-extraction',
+        name: 'Text Extraction',
+        description: 'Paste URL → Fetch page → Extract clean text → Copy/download',
+        icon: '🧹',
+        trayId: 'web',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'extract-mode',
+            name: 'Extract Mode',
+            type: 'select',
+            defaultValue: 'main-content',
+            options: ['full-article', 'main-content', 'metadata']
+          },
+          {
+            id: 'export-format',
+            name: 'Export Format',
+            type: 'select',
+            defaultValue: 'txt',
+            options: ['txt', 'markdown', 'pdf']
+          }
+        ]
+      },
+      {
+        id: 'screenshot-tool',
+        name: 'Screenshot Tool',
+        description: 'Paste URL → Choose screenshot type → Capture → Download',
+        icon: '📸',
+        category: 'web',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'screenshot-type',
+            name: 'Screenshot Type',
+            type: 'select',
+            defaultValue: 'full-page',
+            options: ['full-page', 'visible-area', 'custom-size']
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'png',
+            options: ['png', 'jpg', 'webp']
+          },
+          {
+            id: 'delay-capture',
+            name: 'Delay Capture (seconds)',
+            type: 'slider',
+            defaultValue: 0,
+            min: 0,
+            max: 10,
+            step: 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'ai',
+    name: 'AI Assist',
+    description: 'AI-powered text and content tools',
+    icon: '🤖',
+    color: 'pink',
+    tools: [
+      {
+        id: 'text-summarization',
+        name: 'Text Summarization',
+        description: 'Paste/upload text → Choose summary length → Get AI summary',
+        icon: '📋',
+        category: 'ai',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'summary-length',
+            name: 'Summary Length',
+            type: 'select',
+            defaultValue: 'medium',
+            options: ['short', 'medium', 'detailed']
+          },
+          {
+            id: 'highlight-key-points',
+            name: 'Highlight Key Points',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'export-format',
+            name: 'Export Format',
+            type: 'select',
+            defaultValue: 'txt',
+            options: ['txt', 'pdf']
+          }
+        ]
+      },
+      {
+        id: 'content-cleaning',
+        name: 'Content Cleaning',
+        description: 'Paste messy text → Choose cleaning mode → Clean → Copy/download',
+        icon: '🧹',
+        category: 'ai',
+        planRequired: 'free',
+        options: [
+          {
+            id: 'remove-line-breaks',
+            name: 'Remove Line Breaks',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'fix-spacing',
+            name: 'Fix Spacing/Punctuation',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'remove-html-tags',
+            name: 'Remove HTML Tags',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'normalize-formatting',
+            name: 'Normalize Formatting',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'target-format',
+            name: 'Target Format',
+            type: 'select',
+            defaultValue: 'plain',
+            options: ['plain', 'academic', 'business', 'casual']
+          }
+        ]
+      },
+      {
+        id: 'smart-processing',
+        name: 'Smart Processing',
+        description: 'Upload doc/text → AI suggests: "Summarize", "Extract emails", "Convert to CSV", etc.',
+        icon: '🧠',
+        category: 'ai',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'suggestion-mode',
+            name: 'Suggestion Mode',
+            type: 'select',
+            defaultValue: 'auto',
+            options: ['auto', 'manual']
+          },
+          {
+            id: 'pipeline-mode',
+            name: 'Custom Pipeline',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'save-workflow',
+            name: 'Save & Reuse Workflow',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'security',
+    name: 'Security',
+    description: 'PDF protection and security tools',
+    icon: '🔒',
+    color: 'red',
+    tools: [
+      {
+        id: 'pdf-password-remove',
+        name: 'Remove PDF Password',
+        description: 'Upload password-protected PDF → Remove protection → Download unlocked PDF',
+        icon: '🔓',
+        category: 'security',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'password-input',
+            name: 'Password (if known)',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'Enter password if you know it'
+          },
+          {
+            id: 'brute-force',
+            name: 'Brute Force (if unknown)',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'output-format',
+            name: 'Output Format',
+            type: 'select',
+            defaultValue: 'pdf',
+            options: ['pdf', 'docx']
+          }
+        ]
+      },
+      {
+        id: 'pdf-password-protect',
+        name: 'Add PDF Password',
+        description: 'Upload PDF → Set password & permissions → Download protected PDF',
+        icon: '🔐',
+        category: 'security',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'password',
+            name: 'Password',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'Enter password'
+          },
+          {
+            id: 'permissions',
+            name: 'Permissions',
+            type: 'select',
+            defaultValue: 'print-copy',
+            options: ['print-copy', 'print-only', 'no-print', 'full-access']
+          },
+          {
+            id: 'encryption-level',
+            name: 'Encryption Level',
+            type: 'select',
+            defaultValue: '128-bit',
+            options: ['128-bit', '256-bit']
+          }
+        ]
+      },
+      {
+        id: 'pdf-encrypt',
+        name: 'Advanced PDF Encryption',
+        description: 'Upload PDF → Advanced encryption settings → Download encrypted PDF',
+        icon: '🛡️',
+        trayId: 'security',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'encryption-algorithm',
+            name: 'Encryption Algorithm',
+            type: 'select',
+            defaultValue: 'AES-256',
+            options: ['AES-128', 'AES-256', 'RC4-128']
+          },
+          {
+            id: 'user-permissions',
+            name: 'User Permissions',
+            type: 'select',
+            defaultValue: 'standard',
+            options: ['standard', 'restricted', 'custom']
+          },
+          {
+            id: 'expiry-date',
+            name: 'Set Expiry Date',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'YYYY-MM-DD'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'e-signature',
+    name: 'E-Signature',
+    description: 'Digital signatures and form filling',
+    icon: '✍️',
+    color: 'indigo',
+    tools: [
+      {
+        id: 'digital-signature',
+        name: 'Digital Signature',
+        description: 'Upload PDF → Add digital signature → Download signed PDF',
+        icon: '✍️',
+        category: 'e-signature',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'signature-type',
+            name: 'Signature Type',
+            type: 'select',
+            defaultValue: 'typed',
+            options: ['typed', 'drawn', 'uploaded', 'certificate']
+          },
+          {
+            id: 'signature-position',
+            name: 'Signature Position',
+            type: 'select',
+            defaultValue: 'auto',
+            options: ['auto', 'custom', 'multiple']
+          },
+          {
+            id: 'certificate-verification',
+            name: 'Certificate Verification',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      },
+      {
+        id: 'form-filling',
+        name: 'PDF Form Filling',
+        description: 'Upload PDF form → Fill fields → Download completed form',
+        icon: '📝',
+        category: 'e-signature',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'auto-detect-fields',
+            name: 'Auto-detect Form Fields',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'save-template',
+            name: 'Save as Template',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'batch-fill',
+            name: 'Batch Form Filling',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'signature-verification',
+        name: 'Signature Verification',
+        description: 'Upload signed PDF → Verify signatures → Get verification report',
+        icon: '✅',
+        category: 'e-signature',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'verification-level',
+            name: 'Verification Level',
+            type: 'select',
+            defaultValue: 'standard',
+            options: ['basic', 'standard', 'comprehensive']
+          },
+          {
+            id: 'certificate-chain',
+            name: 'Certificate Chain Validation',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'audit-trail',
+            name: 'Generate Audit Trail',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'advanced',
+    name: 'Advanced',
+    description: 'Advanced processing and automation',
+    icon: '⚡',
+    color: 'yellow',
+    tools: [
+      {
+        id: 'folder-processing',
+        name: 'Folder Processing',
+        description: 'Upload entire folder → Process all files → Download results',
+        icon: '📁',
+        category: 'advanced',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'recursive-processing',
+            name: 'Recursive Processing',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'file-filters',
+            name: 'File Filters',
+            type: 'input',
+            defaultValue: '',
+            placeholder: '*.pdf, *.docx, *.jpg'
+          },
+          {
+            id: 'output-structure',
+            name: 'Output Structure',
+            type: 'select',
+            defaultValue: 'flat',
+            options: ['flat', 'maintain-folders', 'custom']
+          }
+        ]
+      },
+      {
+        id: 'workflow-automation',
+        name: 'Workflow Automation',
+        description: 'Create custom processing workflows → Save & reuse → Batch process',
+        icon: '🔄',
+        category: 'advanced',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'workflow-steps',
+            name: 'Workflow Steps',
+            type: 'select',
+            defaultValue: '3',
+            options: ['2', '3', '5', '10', 'unlimited']
+          },
+          {
+            id: 'conditional-logic',
+            name: 'Conditional Logic',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'api-integration',
+            name: 'API Integration',
+            type: 'toggle',
+            defaultValue: false
+          },
+          {
+            id: 'scheduling',
+            name: 'Schedule Processing',
+            type: 'toggle',
+            defaultValue: false
+          }
+        ]
+      },
+      {
+        id: 'batch-conversion',
+        name: 'Batch Conversion',
+        description: 'Upload multiple files → Convert to different formats → Download all',
+        icon: '📦',
+        category: 'advanced',
+        planRequired: 'pro',
+        options: [
+          {
+            id: 'target-formats',
+            name: 'Target Formats',
+            type: 'input',
+            defaultValue: '',
+            placeholder: 'pdf, docx, jpg, png'
+          },
+          {
+            id: 'parallel-processing',
+            name: 'Parallel Processing',
+            type: 'toggle',
+            defaultValue: true
+          },
+          {
+            id: 'quality-preservation',
+            name: 'Quality Preservation',
+            type: 'toggle',
+            defaultValue: true
+          }
+        ]
+      }
+    ]
+  }
+]
+
+export function getTrayById(id: string): Tray | undefined {
+  return trays.find(tray => tray.id === id)
+}
+
+export function getToolById(trayId: string, toolId: string) {
+  const tray = getTrayById(trayId)
+  return tray?.tools.find(tool => tool.id === toolId)
+}
+

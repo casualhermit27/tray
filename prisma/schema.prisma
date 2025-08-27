@@ -1,0 +1,239 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?   // For email/password auth
+  emailVerified DateTime?
+  image         String?
+  
+  // Enhanced user profile
+  firstName     String?
+  lastName      String?
+  phone         String?
+  company       String?
+  jobTitle      String?
+  website       String?
+  bio           String?
+  location      String?
+  timezone      String?
+  language      String?   @default("en")
+  
+  // Account status
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  loginCount    Int       @default(0)
+  
+  // Social login info
+  accounts      Account[]
+  sessions      Session[]
+  
+  // Timestamps
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations
+  subscription  Subscription?
+  usageStats    UsageStats[]
+  favoriteTools FavoriteTool[]
+  paymentHistory PaymentHistory[]
+  apiKeys       ApiKey[]
+  teamMembers   TeamMember[]
+  teamOwner     Team?     @relation("TeamOwner")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Subscription {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Stripe fields
+  stripeCustomerId    String?   @unique
+  stripeSubscriptionId String?   @unique
+  stripePriceId       String?
+  stripeProductId     String?
+  
+  // Subscription details
+  status        String   @default("inactive") // active, inactive, past_due, canceled, trialing
+  plan          String   @default("free") // free, pro, business, enterprise
+  planName      String?  // Human readable plan name
+  planDescription String? // Plan description
+  
+  // Billing details
+  amount        Int?     // Amount in cents
+  currency      String   @default("usd")
+  billingCycle  String?  // monthly, yearly
+  trialEnd      DateTime?
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
+  cancelAtPeriodEnd  Boolean  @default(false)
+  canceledAt    DateTime?
+  
+  // Plan limits
+  maxFileSize   Int?     // in bytes
+  maxFilesPerMonth Int?
+  maxTeamMembers Int?
+  maxApiCalls   Int?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PaymentHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Payment details
+  stripePaymentIntentId String?   @unique
+  stripeInvoiceId       String?
+  amount        Int      // Amount in cents
+  currency      String   @default("usd")
+  status        String   // succeeded, failed, pending, canceled
+  
+  // Billing details
+  description  String?
+  receiptUrl   String?
+  
+  // Plan information
+  plan        String?
+  billingCycle String?
+  
+  // Timestamps
+  paidAt      DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model UsageStats {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Usage tracking
+  toolId    String
+  toolName  String
+  trayId    String
+  action    String   // process, download, convert, etc.
+  fileSize  Int?     // in bytes
+  fileCount Int?     // number of files processed
+  processingTime Int? // in milliseconds
+  
+  // Daily limits tracking
+  date      String   // YYYY-MM-DD format for easy querying
+  
+  // Metadata
+  metadata  String?  // JSON string for additional data
+  timestamp DateTime @default(now())
+  
+  @@index([userId, date])
+  @@index([toolId, date])
+}
+
+model FavoriteTool {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  toolId    String
+  toolName  String
+  trayId    String
+  position  Int      // For ordering favorites
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, toolId])
+}
+
+model ApiKey {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String   // API key name/description
+  key         String   @unique // Hashed API key
+  permissions String[] // Array of permissions
+  isActive    Boolean  @default(true)
+  lastUsedAt  DateTime?
+  
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime?
+}
+
+model Team {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  ownerId     String   @unique
+  owner       User     @relation("TeamOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  // Team settings
+  maxMembers  Int      @default(5)
+  isActive    Boolean  @default(true)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  members     TeamMember[]
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  
+  role      String   @default("member") // owner, admin, member
+  joinedAt  DateTime @default(now())
+  
+  @@unique([userId, teamId])
+}

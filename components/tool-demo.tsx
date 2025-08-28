@@ -1,10 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Upload, FileText, BarChart3, Image, Globe, Bot } from 'lucide-react'
+import { Upload, FileText, BarChart3, Image, Globe, Shield, PenTool, Zap } from 'lucide-react'
 
 interface ToolDemoProps {
-  type: 'document' | 'data' | 'media' | 'web' | 'ai'
+  type: 'document' | 'data' | 'media' | 'web' | 'security' | 'e-signature' | 'advanced'
   title: string
   description: string
   icon: string
@@ -15,7 +15,9 @@ const iconMap = {
   data: BarChart3,
   media: Image,
   web: Globe,
-  ai: Bot
+  security: Shield,
+  'e-signature': PenTool,
+  advanced: Zap
 }
 
 export function ToolDemo({ type, title, description, icon }: ToolDemoProps) {

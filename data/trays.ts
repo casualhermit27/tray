@@ -399,11 +399,7 @@ export const trays: Tray[] = [
             defaultValue: true
           }
         ]
-      },
-
-
-
-
+      }
     ]
   },
   {
@@ -819,115 +815,6 @@ export const trays: Tray[] = [
             min: 0,
             max: 10,
             step: 1
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'ai',
-    name: 'AI Assist',
-    description: 'AI-powered text and content tools',
-    icon: '🤖',
-    color: 'pink',
-    tools: [
-      {
-        id: 'text-summarization',
-        name: 'Text Summarization',
-        description: 'Create AI-powered text summaries',
-        icon: '📋',
-        trayId: 'ai',
-        planRequired: 'free',
-        options: [
-          {
-            id: 'summary-length',
-            name: 'Summary Length',
-            type: 'select',
-            defaultValue: 'medium',
-            options: ['short', 'medium', 'detailed']
-          },
-          {
-            id: 'highlight-key-points',
-            name: 'Highlight Key Points',
-            type: 'toggle',
-            defaultValue: true
-          },
-          {
-            id: 'export-format',
-            name: 'Export Format',
-            type: 'select',
-            defaultValue: 'txt',
-            options: ['txt', 'pdf']
-          }
-        ]
-      },
-      {
-        id: 'content-cleaning',
-        name: 'Content Cleaning',
-        description: 'Clean and format messy text content',
-        icon: '🧹',
-        trayId: 'ai',
-        planRequired: 'free',
-        options: [
-          {
-            id: 'remove-line-breaks',
-            name: 'Remove Line Breaks',
-            type: 'toggle',
-            defaultValue: false
-          },
-          {
-            id: 'fix-spacing',
-            name: 'Fix Spacing/Punctuation',
-            type: 'toggle',
-            defaultValue: true
-          },
-          {
-            id: 'remove-html-tags',
-            name: 'Remove HTML Tags',
-            type: 'toggle',
-            defaultValue: true
-          },
-          {
-            id: 'normalize-formatting',
-            name: 'Normalize Formatting',
-            type: 'toggle',
-            defaultValue: false
-          },
-          {
-            id: 'target-format',
-            name: 'Target Format',
-            type: 'select',
-            defaultValue: 'plain',
-            options: ['plain', 'academic', 'business', 'casual']
-          }
-        ]
-      },
-      {
-        id: 'smart-processing',
-        name: 'Smart Processing',
-        description: 'AI-powered document processing suggestions',
-        icon: '🧠',
-        trayId: 'ai',
-        planRequired: 'pro',
-        options: [
-          {
-            id: 'suggestion-mode',
-            name: 'Suggestion Mode',
-            type: 'select',
-            defaultValue: 'auto',
-            options: ['auto', 'manual']
-          },
-          {
-            id: 'pipeline-mode',
-            name: 'Custom Pipeline',
-            type: 'toggle',
-            defaultValue: false
-          },
-          {
-            id: 'save-workflow',
-            name: 'Save & Reuse Workflow',
-            type: 'toggle',
-            defaultValue: false
           }
         ]
       }

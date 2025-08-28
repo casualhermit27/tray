@@ -15,9 +15,7 @@ import {
   IconWorld,
   IconCode,
   IconLayout,
-  IconSparkles,
-  IconBrain,
-  IconRobot,
+
   IconLock,
   IconShield,
   IconKey,
@@ -135,14 +133,7 @@ const getToolIcon = (toolId: string, trayId: string) => {
   }
   
   // AI
-  if (trayId === 'ai') {
-    switch (toolId) {
-      case 'text-summarization': return <IconBrain {...iconProps} />
-      case 'content-cleaning': return <IconSparkles {...iconProps} />
-      case 'smart-processing': return <IconRobot {...iconProps} />
-      default: return <IconSparkles {...iconProps} />
-    }
-  }
+  
   
   // Security
   if (trayId === 'security') {

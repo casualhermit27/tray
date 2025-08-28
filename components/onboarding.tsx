@@ -47,13 +47,6 @@ const onboardingSteps: OnboardingStep[] = [
     icon: '🌐',
     color: 'orange',
     features: ['HTML to Markdown', 'Text extraction', 'Website screenshots']
-  },
-  {
-    title: 'AI Assist Tray',
-    description: 'Smart content processing and analysis',
-    icon: '🤖',
-    color: 'pink',
-    features: ['Text summarization', 'Content cleaning', 'Smart suggestions']
   }
 ]
 

@@ -21,9 +21,6 @@ import { processSQLFormatter } from '@/lib/processing/sql-formatter'
 import { htmlToMarkdown } from '@/lib/processing/html-markdown'
 import { extractTextFromUrl } from '@/lib/processing/text-extraction'
 import { extractTextOCR } from '@/lib/processing/ocr-extract'
-import { summarizeText } from '@/lib/processing/ai-summarize'
-import { cleanContent } from '@/lib/processing/content-cleaning'
-import { analyzeAndSuggest } from '@/lib/processing/smart-processing'
 
 // Wrapper functions to standardize interface
 const wrapSingleFileFunction = (fn: (file: File, options: any) => Promise<any>) => {
@@ -70,16 +67,6 @@ const PROCESSING_SERVICES: Record<string, (files: File[], options: any, progress
       screenshot: new Uint8Array(0),
       metadata: { width: 1920, height: 1080 }
     }
-  },
-  
-  // AI Tools
-  'text-summarization': wrapSingleFileFunction(summarizeText),
-  'content-cleaning': async (files: File[], options: any, progressTracker?: any) => {
-    const text = await files[0].text()
-    return cleanContent(text, options)
-  },
-  'smart-processing': async (files: File[], options: any, progressTracker?: any) => {
-    return analyzeAndSuggest(files[0], options)
   },
   
   // Security Tools (placeholders)

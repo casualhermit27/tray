@@ -268,51 +268,7 @@ export const TOOL_LIMITS: Record<string, ToolLimits> = {
     }
   },
 
-  // AI Tools
-  'text-summarization': {
-    toolId: 'text-summarization',
-    toolName: 'Text Summarization',
-    free: {
-      ...UNIVERSAL_LIMITS.free,
-      maxFileSize: 5 * 1024 * 1024, // 5 MB for text
-      advancedFeatures: false // Basic summarization
-    },
-    pro: {
-      ...UNIVERSAL_LIMITS.pro,
-      maxFileSize: 50 * 1024 * 1024, // 50 MB for text
-      advancedFeatures: true // AI-powered, multiple languages
-    }
-  },
 
-  'content-cleaning': {
-    toolId: 'content-cleaning',
-    toolName: 'Content Cleaning',
-    free: {
-      ...UNIVERSAL_LIMITS.free,
-      maxFileSize: 5 * 1024 * 1024,
-      advancedFeatures: false // Basic cleaning
-    },
-    pro: {
-      ...UNIVERSAL_LIMITS.pro,
-      maxFileSize: 50 * 1024 * 1024,
-      advancedFeatures: true // AI-powered cleaning
-    }
-  },
-
-  'smart-processing': {
-    toolId: 'smart-processing',
-    toolName: 'Smart Processing',
-    free: {
-      ...UNIVERSAL_LIMITS.free,
-      maxFileSize: 5 * 1024 * 1024,
-      advancedFeatures: false // Basic suggestions
-    },
-    pro: {
-      ...UNIVERSAL_LIMITS.pro,
-      maxFileSize: 50 * 1024 * 1024,
-      advancedFeatures: true // AI analysis, custom workflows
-    }
-  },
 
   // Security Tools (Pro only)
   'pdf-password-remove': {

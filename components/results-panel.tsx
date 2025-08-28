@@ -90,14 +90,7 @@ export default function ResultsPanel({
         prefix = 'screenshot'
         extension = 'png'
         break
-      case 'text-summarization':
-        prefix = 'summarized'
-        extension = 'txt'
-        break
-      case 'content-cleaning':
-        prefix = 'cleaned'
-        extension = 'txt'
-        break
+
       case 'pdf-to-office':
         prefix = 'converted'
         extension = result.metadata?.outputFormat === 'docx' ? 'docx' : 'xlsx'
@@ -110,10 +103,7 @@ export default function ResultsPanel({
         prefix = 'no-background'
         extension = result.metadata?.outputFormat || 'png'
         break
-      case 'smart-processing':
-        prefix = 'suggestions'
-        extension = 'json'
-        break
+
       default:
         prefix = 'processed'
         extension = 'txt'

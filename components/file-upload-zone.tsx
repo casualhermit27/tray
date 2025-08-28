@@ -90,10 +90,7 @@ export default function FileUploadZone({
         return 'Supports image files for text extraction'
       case 'html-to-markdown':
         return 'Supports HTML files'
-      case 'text-summarization':
-      case 'content-cleaning':
-      case 'smart-processing':
-        return 'Supports text files and PDFs'
+
       default:
         return 'Supports various file types'
     }

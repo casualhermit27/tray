@@ -16,9 +16,7 @@ import {
   IconWorld,
   IconCode,
   IconLayout,
-  IconSparkles,
-  IconBrain,
-  IconRobot,
+
   IconLock,
   IconShield,
   IconKey,
@@ -57,7 +55,7 @@ const getTrayIcon = (trayId: string) => {
     case 'data': return <IconTable {...iconProps} />
     case 'media': return <IconPhoto {...iconProps} />
     case 'web': return <IconWorld {...iconProps} />
-    case 'ai': return <IconSparkles {...iconProps} />
+
     case 'security': return <IconLock {...iconProps} />
     case 'e-signature': return <IconSignature {...iconProps} />
     case 'advanced': return <IconSettings {...iconProps} />
@@ -109,16 +107,6 @@ const getToolIcon = (toolId: string, trayId: string) => {
       case 'text-extraction': return <IconFileText {...iconProps} />
       case 'screenshot-tool': return <IconPhoto {...iconProps} />
       default: return <IconWorld {...iconProps} />
-    }
-  }
-  
-  // AI
-  if (trayId === 'ai') {
-    switch (toolId) {
-      case 'text-summarization': return <IconBrain {...iconProps} />
-      case 'content-cleaning': return <IconSparkles {...iconProps} />
-      case 'smart-processing': return <IconRobot {...iconProps} />
-      default: return <IconSparkles {...iconProps} />
     }
   }
   
@@ -193,7 +181,7 @@ export default function LandingPage() {
             variants={itemVariants}
             className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            Clean, minimal tools for documents, data, media, web, and AI tasks. 
+            Clean, minimal tools for documents, data, media, web, security, e-signature, and advanced processing tasks.
             <span className="font-medium text-foreground">{trays.reduce((total, tray) => total + tray.tools.length, 0)} powerful tools</span> to handle all your file processing needs.
           </motion.p>
           
@@ -283,8 +271,8 @@ export default function LandingPage() {
                     <h3 className="text-4xl font-sans font-semibold text-foreground mb-4">
                       {tray.name}
                     </h3>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      {tray.description}
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                      Clean, minimal tools for documents, data, media, web, security, e-signature, and advanced processing tasks.
                     </p>
                   </div>
                   

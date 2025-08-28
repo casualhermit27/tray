@@ -20,11 +20,6 @@ export * from './html-markdown'
 export * from './text-extraction'
 export * from './screenshot-tool'
 
-// AI Processing Services
-export * from './ai-summarize'
-export * from './content-cleaning'
-export * from './smart-processing'
-
 // Main processing function that routes to appropriate service
 export async function processFile(
   file: File | File[],
@@ -44,11 +39,8 @@ export async function processFile(
     compressImage,
     extractTextOCR,
     htmlToMarkdown,
-    summarizeText,
     extractTextFromUrl,
     captureScreenshot,
-    cleanContent,
-    analyzeAndSuggest,
     processBackgroundRemoval
   } = await import('./index')
   
@@ -133,32 +125,6 @@ export async function processFile(
       const screenshotUrl = await screenshotFile.text()
       return await captureScreenshot(screenshotUrl, options)
     
-    // AI Tools
-    case 'text-summarization':
-      if (Array.isArray(file)) {
-        // Process multiple documents
-        const results = await Promise.all(file.map(f => summarizeText(f, options)))
-        return combineTextResults(results, 'summarization')
-      } else {
-        return await summarizeText(file, options)
-      }
-    case 'content-cleaning':
-      if (Array.isArray(file)) {
-        // Process multiple documents
-        const results = await Promise.all(file.map(async f => {
-          const textContent = await f.text()
-          return await cleanContent(textContent, options)
-        }))
-        return combineTextResults(results, 'cleaning')
-      } else {
-        const contentFile = file
-        const textContent = await contentFile.text()
-        return await cleanContent(textContent, options)
-      }
-    case 'smart-processing':
-      const smartFile = Array.isArray(file) ? file[0] : file
-      return await analyzeAndSuggest(smartFile, options)
-    
     default:
       throw new Error(`Unknown tool: ${toolId}`)
   }
@@ -224,43 +190,6 @@ function combineOCRResults(results: any[]) {
     filesProcessed: successful.length,
     filesFailed: failed.length,
     metadata: {
-      individualResults: successful,
-      failedFiles: failed.map(f => f.error)
-    }
-  }
-}
-
-function combineTextResults(results: any[], operation: 'summarization' | 'cleaning') {
-  const successful = results.filter(r => r.success)
-  const failed = results.filter(r => !r.success)
-  
-  if (successful.length === 0) {
-    return {
-      success: false,
-      error: `All ${operation} operations failed`,
-      originalSize: results.reduce((sum, r) => sum + (r.originalSize || 0), 0),
-      finalSize: 0
-    }
-  }
-  
-  const combinedText = successful.map((r, index) => {
-    const title = operation === 'summarization' ? `Summary ${index + 1}` : `Cleaned Document ${index + 1}`
-    return `${title}:\n${r.processedText || r.cleanedText || r.text || ''}`
-  }).join('\n\n---\n\n')
-  
-  const avgCompressionRatio = successful.reduce((sum, r) => sum + (r.compressionRatio || 0), 0) / successful.length
-  const totalOriginalSize = successful.reduce((sum, r) => sum + r.originalSize, 0)
-  
-  return {
-    success: true,
-    processedText: combinedText,
-    compressionRatio: Math.round(avgCompressionRatio),
-    originalSize: totalOriginalSize,
-    finalSize: combinedText.length,
-    filesProcessed: successful.length,
-    filesFailed: failed.length,
-    metadata: {
-      operation,
       individualResults: successful,
       failedFiles: failed.map(f => f.error)
     }

@@ -19,9 +19,7 @@ import {
   IconWorld,
   IconCode,
   IconLayout,
-  IconSparkles,
-  IconBrain,
-  IconRobot,
+
   IconLock,
   IconShield,
   IconKey,
@@ -78,7 +76,7 @@ export default function Navigation() {
       case 'data': return <IconTable {...iconProps} />
       case 'media': return <IconPhoto {...iconProps} />
       case 'web': return <IconWorld {...iconProps} />
-      case 'ai': return <IconSparkles {...iconProps} />
+  
       case 'security': return <IconLock {...iconProps} />
       case 'e-signature': return <IconSignature {...iconProps} />
       case 'advanced': return <IconTablerSettings {...iconProps} />
@@ -159,16 +157,6 @@ export default function Navigation() {
         case 'text-extraction': return <IconFileText {...iconProps} />
         case 'screenshot-tool': return <IconPhoto {...iconProps} />
         default: return <IconWorld {...iconProps} />
-      }
-    }
-    
-    // AI
-    if (trayId === 'ai') {
-      switch (toolId) {
-        case 'text-summarization': return <IconBrain {...iconProps} />
-        case 'content-cleaning': return <IconSparkles {...iconProps} />
-        case 'smart-processing': return <IconRobot {...iconProps} />
-        default: return <IconSparkles {...iconProps} />
       }
     }
     

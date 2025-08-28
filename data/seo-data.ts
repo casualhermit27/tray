@@ -221,7 +221,7 @@ export const seoToolData: SEOToolData[] = [
         answer: 'Yes, our formatter works with standard SQL and most database-specific SQL variants.'
       }
     ],
-    relatedTools: ['json-formatter', 'excel-cleaner', 'content-cleaning']
+    relatedTools: ['json-formatter', 'excel-cleaner', 'html-to-markdown']
   },
 
   // Media Tools
@@ -292,7 +292,7 @@ export const seoToolData: SEOToolData[] = [
         answer: 'OCR works best with printed text. Handwritten text recognition accuracy may vary.'
       }
     ],
-    relatedTools: ['pdf-to-office', 'text-summarization', 'content-cleaning']
+    relatedTools: ['pdf-to-office', 'ocr-extraction', 'html-to-markdown']
   },
   {
     toolId: 'background-removal',
@@ -340,7 +340,7 @@ export const seoToolData: SEOToolData[] = [
         answer: 'Yes, our converter handles tables, lists, headings, and other HTML elements accurately.'
       }
     ],
-    relatedTools: ['text-extraction', 'content-cleaning', 'json-formatter']
+    relatedTools: ['text-extraction', 'html-to-markdown', 'json-formatter']
   },
   {
     toolId: 'text-extraction',
@@ -363,7 +363,7 @@ export const seoToolData: SEOToolData[] = [
         answer: 'Export extracted content as TXT, Markdown, or PDF formats.'
       }
     ],
-    relatedTools: ['html-to-markdown', 'text-summarization', 'content-cleaning']
+    relatedTools: ['html-to-markdown', 'text-extraction', 'json-formatter']
   },
   {
     toolId: 'screenshot-tool',
@@ -389,76 +389,7 @@ export const seoToolData: SEOToolData[] = [
     relatedTools: ['text-extraction', 'html-to-markdown', 'image-compression']
   },
 
-  // AI Assist Tools
-  {
-    toolId: 'text-summarization',
-    slug: 'ai-text-summarizer',
-    title: 'Free AI Text Summarizer Online | Trayyy',
-    metaDescription: 'Summarize text and documents online for free. AI-powered summarization with adjustable length. Highlight key points and export summaries.',
-    h1: 'Free AI Text Summarizer Online',
-    keywords: ['ai text summarizer', 'summarize articles online', 'text summary generator', 'document summarizer', 'auto summarize'],
-    faqSchema: [
-      {
-        question: 'How does AI text summarization work?',
-        answer: 'Our AI analyzes your text to identify key points and create concise summaries while preserving important information.'
-      },
-      {
-        question: 'Can I control the summary length?',
-        answer: 'Yes, choose from short, medium, or detailed summary lengths based on your needs.'
-      },
-      {
-        question: 'What file types can be summarized?',
-        answer: 'Upload TXT files, PDFs, or paste text directly for AI-powered summarization.'
-      }
-    ],
-    relatedTools: ['content-cleaning', 'smart-processing', 'ocr-extraction']
-  },
-  {
-    toolId: 'content-cleaning',
-    slug: 'text-content-cleaner',
-    title: 'Free Text Content Cleaner & Formatter Online | Trayyy',
-    metaDescription: 'Clean and format text content online for free. Remove line breaks, fix spacing, strip HTML tags, and improve text formatting automatically.',
-    h1: 'Free Text Content Cleaner Online',
-    keywords: ['text cleaner online', 'format text content', 'remove line breaks', 'fix text spacing', 'clean text formatting'],
-    faqSchema: [
-      {
-        question: 'What text cleaning features are available?',
-        answer: 'Remove line breaks, fix spacing and punctuation, strip HTML tags, and normalize text formatting.'
-      },
-      {
-        question: 'Can it clean text from copied web content?',
-        answer: 'Yes, it excels at cleaning messy text copied from websites, PDFs, and other sources.'
-      },
-      {
-        question: 'Does it preserve important formatting?',
-        answer: 'Yes, you can choose which cleaning actions to apply while preserving necessary formatting.'
-      }
-    ],
-    relatedTools: ['text-summarization', 'smart-processing', 'html-to-markdown']
-  },
-  {
-    toolId: 'smart-processing',
-    slug: 'ai-smart-processing',
-    title: 'AI Smart Document Processing & Analysis | Trayyy',
-    metaDescription: 'AI-powered document analysis and processing suggestions. Smart workflows for extracting data, converting formats, and optimizing documents.',
-    h1: 'AI Smart Document Processing Online',
-    keywords: ['ai document processing', 'smart document analysis', 'automated document workflow', 'ai file processing', 'document ai'],
-    faqSchema: [
-      {
-        question: 'How does smart processing work?',
-        answer: 'Upload your document and our AI analyzes it to suggest the best processing actions like summarize, extract data, or convert formats.'
-      },
-      {
-        question: 'Can I create custom processing workflows?',
-        answer: 'Yes, build custom pipelines and save workflows for reuse with similar documents.'
-      },
-      {
-        question: 'What types of suggestions does AI provide?',
-        answer: 'AI suggests actions like text extraction, data conversion, summarization, format changes, and data cleaning.'
-      }
-    ],
-    relatedTools: ['text-summarization', 'content-cleaning', 'ocr-extraction']
-  },
+
 
   // Security Tools (Pro & Business)
   {
@@ -647,7 +578,7 @@ export const seoToolData: SEOToolData[] = [
         answer: 'Yes, set up scheduled workflows to automatically process files at specified times or intervals.'
       }
     ],
-    relatedTools: ['folder-processing', 'batch-conversion', 'smart-processing']
+    relatedTools: ['folder-processing', 'batch-conversion', 'workflow-automation']
   },
   {
     toolId: 'batch-conversion',

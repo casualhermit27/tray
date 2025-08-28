@@ -35,9 +35,7 @@ const getToolName = (toolId: string) => {
     'html-to-markdown': 'HTML to Markdown',
     'text-extraction': 'Text Extraction',
     'screenshot-tool': 'Screenshot',
-    'text-summarization': 'Text Summarization',
-    'content-cleaning': 'Content Cleaning',
-    'smart-processing': 'Smart Processing'
+
   }
   return toolNames[toolId] || toolId
 }

@@ -28,7 +28,7 @@ export function PricingTable() {
       data: ['excel-to-csv', 'csv-to-excel', 'json-formatter', 'excel-cleaner'],
       media: ['image-compression', 'format-conversion', 'ocr-extraction', 'background-removal'],
       web: ['html-to-markdown', 'text-extraction', 'screenshot-tool'],
-      ai: ['text-summarization', 'content-cleaning', 'smart-processing'],
+  
       security: ['pdf-password-remove', 'pdf-password-protect', 'pdf-encrypt'],
       esignature: ['digital-signature', 'form-filling', 'signature-verification'],
       advanced: ['folder-processing', 'workflow-automation', 'batch-conversion']

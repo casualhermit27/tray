@@ -62,7 +62,6 @@ export interface PlanLimits {
   ads: boolean
   priorityQueue: boolean
   ocrSupport: boolean
-  aiAssist: boolean
   apiAccess: boolean
   teamMembers?: number
   whiteLabel: boolean

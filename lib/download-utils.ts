@@ -114,15 +114,7 @@ export function generateFilename(originalName: string, toolId: string, extension
     case 'screenshot-tool':
       prefix = 'screenshot'
       break
-    case 'text-summarization':
-      prefix = 'summarized'
-      break
-    case 'content-cleaning':
-      prefix = 'cleaned'
-      break
-    case 'smart-processing':
-      prefix = 'suggestions'
-      break
+
     case 'text-summarizer':
       prefix = 'summarized'
       break
@@ -343,56 +335,7 @@ export function handleToolDownload(toolId: string, result: any, originalFilename
         }
         break
 
-      // AI Tools
-      case 'text-summarization':
-        if (result.summary) {
-          downloadText(result.summary, {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'txt')
-          })
-        } else if (result.processedText) {
-          downloadText(result.processedText, {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'txt')
-          })
-        } else if (result.downloadUrl) {
-          downloadBlob(result.downloadUrl, {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'txt')
-          })
-        } else {
-          throw new Error('No summary data available for download')
-        }
-        break
 
-      case 'content-cleaning':
-        if (result.cleanedText) {
-          downloadText(result.cleanedText, {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'txt')
-          })
-        } else if (result.processedText) {
-          downloadText(result.processedText, {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'txt')
-          })
-        } else if (result.downloadUrl) {
-          downloadBlob(result.downloadUrl, {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'txt')
-          })
-        } else {
-          throw new Error('No cleaned content data available for download')
-        }
-        break
-
-      case 'smart-processing':
-        if (result.suggestions) {
-          downloadText(JSON.stringify(result.suggestions, null, 2), {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'json')
-          })
-        } else if (result.downloadUrl) {
-          downloadBlob(result.downloadUrl, {
-            filename: getFinalFilename(customFilename, originalFilename, toolId, 'json')
-          })
-        } else {
-          throw new Error('No suggestions data available for download')
-        }
-        break
 
       default:
         // Fallback: try to download as blob if possible

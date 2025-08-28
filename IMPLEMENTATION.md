@@ -148,43 +148,7 @@ This document outlines the complete implementation of all requested tools with t
 
 **File**: `lib/processing/screenshot-tool.ts`
 
-## 🤖 **AI Assist Tray**
 
-### 13. Text Summarization
-**Flow**: Paste/upload text → Choose summary length → Get AI summary
-
-**Features Implemented**:
-- ✅ Summary lengths: Short (1-2 sentences), Medium (bullets), Detailed (paragraph)
-- ✅ Key point highlighting with emphasis
-- ✅ Export formats: TXT, PDF
-- ✅ Compression ratio tracking
-- ✅ **No AI dependency by default** - uses rule-based summarization
-
-**File**: `lib/processing/ai-summarize.ts`
-
-### 14. Content Cleaning
-**Flow**: Paste messy text → Choose cleaning mode → Clean → Copy/download
-
-**Features Implemented**:
-- ✅ Remove line breaks with smart paragraph detection
-- ✅ Fix spacing and punctuation automatically
-- ✅ Remove HTML tags and decode entities
-- ✅ Smart pattern detection (email, social media, web content)
-- ✅ Multiple cleaning profiles for different content types
-
-**File**: `lib/processing/content-cleaning.ts`
-
-### 15. Smart Processing
-**Flow**: Upload doc/text → AI suggests actions → Apply suggestions
-
-**Features Implemented**:
-- ✅ Content analysis: Format detection, language detection, pattern recognition
-- ✅ Smart suggestions: Extract emails, Convert formats, Summarize, Clean content
-- ✅ Custom pipeline creation and workflow saving
-- ✅ Confidence scoring for suggestions
-- ✅ One-click execution of suggested actions
-
-**File**: `lib/processing/smart-processing.ts`
 
 ## 🔧 **Technical Implementation**
 
@@ -209,9 +173,7 @@ lib/processing/
 ├── html-markdown.ts      # HTML ↔ Markdown conversion
 ├── text-extraction.ts    # Web page text extraction
 ├── screenshot-tool.ts    # Website screenshot capture
-├── ai-summarize.ts       # Text summarization (rule-based)
-├── content-cleaning.ts   # Text cleaning and formatting
-├── smart-processing.ts   # Content analysis and suggestions
+
 └── index.ts             # Main processing router
 ```
 
@@ -242,12 +204,7 @@ npm start
 
 ## 🔐 **Environment Variables**
 
-### **Optional AI Services** (Not required by default)
-```bash
-# Only needed if you want to use external AI services
-OPENAI_API_KEY=your_key_here          # For advanced summarization
-HUGGINGFACE_API_KEY=your_key_here     # For transformer models
-```
+
 
 ### **Optional External Services**
 ```bash
@@ -298,7 +255,7 @@ SIMULATE_PROCESSING=true      # Use simulated processing for development
 
 ✅ **All 15 tools implemented** with detailed flows  
 ✅ **Minimalistic design** maintained throughout  
-✅ **No AI dependencies by default** (can be added optionally)  
+✅ **No AI dependencies** (AI features removed as requested)  
 ✅ **Real processing logic** with actual libraries  
 ✅ **Comprehensive error handling** and validation  
 ✅ **File download system** for all output types  

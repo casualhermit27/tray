@@ -93,7 +93,7 @@ export default function ToolPage() {
                     <li>• Up to 100MB files</li>
                     <li>• Process up to 10 files at once</li>
                     <li>• No watermarks or ads</li>
-                    <li>• OCR and AI features</li>
+                    <li>• OCR text extraction</li>
                     <li>• Team collaboration</li>
                     <li>• API access</li>
                   </>
@@ -678,10 +678,7 @@ function getAcceptedFileTypes(toolId: string): Record<string, string[]> {
       return { 'text/plain': ['.txt'] }
     case 'screenshot-tool':
       return { 'text/plain': ['.txt'] }
-    case 'text-summarization':
-    case 'content-cleaning':
-    case 'smart-processing':
-      return { 'text/plain': ['.txt'], 'application/pdf': ['.pdf'] }
+
     case 'pdf-to-office':
       return { 'application/pdf': ['.pdf'] }
     case 'sql-formatter':
@@ -711,9 +708,7 @@ function getMaxFiles(toolId: string) {
       return 5 // Batch image processing
     case 'ocr-extraction':
       return 3 // Multiple images for text extraction
-    case 'text-summarization':
-    case 'content-cleaning':
-      return 3 // Multiple documents for processing
+
     
     // All other tools work with single files
     case 'pdf-compress':
@@ -725,7 +720,7 @@ function getMaxFiles(toolId: string) {
     case 'html-to-markdown':
     case 'text-extraction':
     case 'screenshot-tool':
-    case 'smart-processing':
+
     case 'pdf-to-office':
     case 'sql-formatter':
     case 'background-removal':
@@ -771,18 +766,7 @@ function getSuccessMessage(toolId: string, result: any) {
       return `Successfully extracted ${result.metadata?.wordCount || 0} words from webpage`
     case 'screenshot-tool':
       return `Successfully captured screenshot (${result.metadata?.width}x${result.metadata?.height})`
-    case 'text-summarization':
-      if (result.filesProcessed > 1) {
-        return `Successfully summarized ${result.filesProcessed} documents with avg ${result.compressionRatio}% reduction`
-      }
-      return `Successfully summarized text with ${result.compressionRatio}% reduction`
-    case 'content-cleaning':
-      if (result.filesProcessed > 1) {
-        return `Successfully cleaned ${result.filesProcessed} documents with ${result.cleaningActions?.length || 0} total improvements`
-      }
-      return `Successfully cleaned content with ${result.cleaningActions?.length || 0} improvements`
-    case 'smart-processing':
-      return `Found ${result.suggestions?.length || 0} processing suggestions`
+
     case 'pdf-to-office':
       return `Successfully converted PDF to ${result.metadata?.outputFormat === 'docx' ? 'Word' : 'Excel'} format`
     case 'sql-formatter':
@@ -840,21 +824,7 @@ function getAdditionalMetadata(toolId: string, result: any) {
       return { wordCount: result.wordCount }
     case 'screenshot-tool':
       return { width: result.metadata?.width, height: result.metadata?.height }
-    case 'text-summarization':
-      return { 
-        compressionRatio: result.compressionRatio, 
-        model: result.model,
-        filesProcessed: result.filesProcessed,
-        filesFailed: result.filesFailed
-      }
-    case 'content-cleaning':
-      return { 
-        cleaningActions: result.cleaningActions,
-        filesProcessed: result.filesProcessed,
-        filesFailed: result.filesFailed
-      }
-    case 'smart-processing':
-      return { suggestions: result.suggestions }
+
     case 'pdf-to-office':
       return { 
         outputFormat: result.metadata?.outputFormat,

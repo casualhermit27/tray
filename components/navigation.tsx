@@ -33,6 +33,7 @@ import {
 import { useAppStore, usePlanStore } from '@/store'
 import { trays } from '@/data/trays'
 import { getSEODataByToolId } from '@/data/seo-data'
+import { UsageIndicator } from './usage-indicator'
 
 export default function Navigation() {
   const { data: session } = useSession()
@@ -333,6 +334,9 @@ export default function Navigation() {
                   {getPlanIcon(currentPlan)}
                   <span>{planDetails.name}</span>
                 </div>
+                
+                {/* Daily Usage Indicator */}
+                <UsageIndicator />
                 
                 {/* User Menu */}
                 <div className="relative group">

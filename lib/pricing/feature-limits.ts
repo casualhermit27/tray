@@ -23,19 +23,19 @@ export interface ToolLimits {
 const UNIVERSAL_LIMITS = {
   free: {
     plan: 'free' as const,
-    maxFileSize: 10 * 1024 * 1024, // 10 MB
+    maxFileSize: 20 * 1024 * 1024, // 20 MB
     maxFilesPerTask: 1,
-    maxTasksPerHour: 3,
+    maxTasksPerHour: -1, // No hourly limit, only daily limit
     batchProcessing: false,
     priorityQueue: false,
     advancedFeatures: false,
-    watermark: true
+    watermark: false // No watermarks in new model
   },
   pro: {
     plan: 'pro' as const,
-    maxFileSize: 100 * 1024 * 1024, // 100 MB
+    maxFileSize: 200 * 1024 * 1024, // 200 MB
     maxFilesPerTask: 10,
-    maxTasksPerHour: -1, // unlimited
+    maxTasksPerHour: -1, // No hourly limit, only daily limit
     batchProcessing: true,
     priorityQueue: true,
     advancedFeatures: true,

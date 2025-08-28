@@ -12,6 +12,7 @@ import ProcessingHistory from '@/components/processing-history'
 import Navigation from '@/components/navigation'
 import PlanToggle from '@/components/plan-toggle'
 import { handleToolDownload } from '@/lib/download-utils'
+import { FreeUserAds } from '@/components/free-user-ads'
 
 export default function MainApp() {
   const { currentView, jobs, setView } = useAppStore()
@@ -99,6 +100,9 @@ export default function MainApp() {
 
       {/* Plan Toggle for Testing */}
       <PlanToggle />
+
+      {/* Free User Ads */}
+      <FreeUserAds />
     </div>
   )
 }

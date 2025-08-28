@@ -14,7 +14,6 @@ export function PricingTable() {
     { id: 'data', name: 'Data Tools', icon: Zap },
     { id: 'media', name: 'Media Tools', icon: Zap },
     { id: 'web', name: 'Web Tools', icon: Zap },
-    { id: 'ai', name: 'AI Tools', icon: Zap },
     { id: 'security', name: 'Security', icon: Zap },
     { id: 'esignature', name: 'E-Signature', icon: Zap },
     { id: 'advanced', name: 'Advanced', icon: Zap }
@@ -186,36 +185,38 @@ export function PricingTable() {
         >
           <div className="text-center p-6 bg-yellow-50 rounded-xl border border-yellow-200">
             <h3 className="text-xl font-semibold text-yellow-800 mb-2">Free Plan</h3>
-            <div className="text-3xl font-bold text-yellow-600 mb-2">₹0</div>
-            <p className="text-yellow-700">Perfect for occasional use</p>
+            <div className="text-3xl font-bold text-yellow-600 mb-2">$0</div>
+            <p className="text-yellow-700">Perfect for light users</p>
             <ul className="text-sm text-yellow-700 mt-3 space-y-1">
-              <li>• 3 tasks per hour</li>
-              <li>• 10MB file limit</li>
-              <li>• Single file processing</li>
-              <li>• Basic features only</li>
+              <li>• 5 tasks per day</li>
+              <li>• 20MB file limit</li>
+              <li>• All tools available</li>
+              <li>• Files deleted instantly</li>
+              <li>• Non-intrusive ads</li>
             </ul>
           </div>
 
           <div className="text-center p-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl text-white shadow-lg">
             <h3 className="text-xl font-semibold mb-2">Pro Plan</h3>
-            <div className="text-3xl font-bold mb-2">₹399/month</div>
-            <p className="opacity-90">For power users & professionals</p>
+            <div className="text-3xl font-bold mb-2">$4.99/month</div>
+            <p className="opacity-90">For students & professionals</p>
             <ul className="opacity-90 mt-3 space-y-1 text-sm">
-              <li>• Unlimited tasks</li>
-              <li>• 100MB file limit</li>
-              <li>• Batch processing</li>
+              <li>• 50 tasks per day</li>
+              <li>• 200MB file limit</li>
+              <li>• Priority processing</li>
+              <li>• No ads</li>
               <li>• All features unlocked</li>
             </ul>
           </div>
 
           <div className="text-center p-6 bg-green-50 rounded-xl border border-green-200">
             <h3 className="text-xl font-semibold text-green-800 mb-2">Annual Savings</h3>
-            <div className="text-3xl font-bold text-green-600 mb-2">₹3,999</div>
-            <p className="text-green-700">Save ₹789 per year</p>
+            <div className="text-3xl font-bold text-green-600 mb-2">$49</div>
+            <p className="text-green-700">Save $10.88 per year</p>
             <div className="text-sm text-green-700 mt-3">
-              <div>Monthly: ₹399 × 12 = ₹4,788</div>
-              <div>Annual: ₹3,999</div>
-              <div className="font-semibold mt-1">You save: ₹789</div>
+              <div>Monthly: $4.99 × 12 = $59.88</div>
+              <div>Annual: $49</div>
+              <div className="font-semibold mt-1">You save: $10.88</div>
             </div>
           </div>
         </motion.div>

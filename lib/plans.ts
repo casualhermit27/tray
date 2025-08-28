@@ -8,13 +8,14 @@ export const PLANS = {
     name: 'Free Plan',
     price: 0,
     period: 'month',
-    description: 'Perfect for getting started',
+    description: 'Perfect for light users and occasional conversions',
     features: [
-      'Access to all core tools',
-      '3 operations per hour',
-      '10 MB max file size',
-      'Single file processing',
-      'Watermarked outputs'
+      'Access to all tools (PDF, Data, Media, Web, Security, E-Sign, Advanced)',
+      '5 tasks per day',
+      '20 MB max file size',
+      'All tools available',
+      'Files deleted instantly after processing',
+      'No file storage'
     ],
     cta: 'Get Started Free',
     popular: false
@@ -22,19 +23,16 @@ export const PLANS = {
   pro: {
     id: 'pro',
     name: 'Pro Plan',
-    price: 399,
+    price: 4.99,
     period: 'month',
-    description: 'For power users and professionals',
+    description: 'For students, professionals, and businesses',
     features: [
-      'Unlimited operations',
-      '100 MB max file size',
-      'Batch processing (up to 10 files)',
-      'Priority queue processing',
-      'No watermarks',
-      'Advanced features unlocked',
-      'OCR and AI features',
-      'Team collaboration',
-      'API access'
+      '50 tasks per day (practically unlimited)',
+      '200 MB max file size',
+      'All tools available (same as Free)',
+      'Priority processing (Pro tasks queued first)',
+      'No ads',
+      'Files deleted after processing (no storage)'
     ],
     cta: 'Start Pro Trial',
     popular: true
@@ -43,21 +41,20 @@ export const PLANS = {
 
 export const PLAN_LIMITS: Record<PlanType, PlanLimits> = {
   free: {
-    maxFileSize: 10 * 1024 * 1024, // 10 MB
-    maxFilesAtOnce: 2,
-    maxDailyTasks: 5,
-    maxPagesPerFile: 10, // Maximum 10 pages per file
-    watermark: true,
-    ads: true,
+    maxFileSize: 20 * 1024 * 1024, // 20 MB
+    maxFilesAtOnce: 1,
+    maxDailyTasks: 5, // 5 tasks per day
+    maxPagesPerFile: 50, // Maximum 50 pages per file
+    watermark: false, // No watermarks in new model
+    ads: true, // Show ads for free users
     priorityQueue: false,
-    ocrSupport: false,
-    aiAssist: false,
+    ocrSupport: true, // OCR available in free plan
     apiAccess: false,
     whiteLabel: false,
     
     // New features
     cloudIntegrations: false, // No cloud uploads
-    fileRetention: 0.5, // 30 minutes (0.5 days)
+    fileRetention: 0, // Instant deletion (0 days)
     multiLanguageOCR: false, // English only
     fileHistory: 0, // No file history
     versioning: false, // No versioning
@@ -73,24 +70,23 @@ export const PLAN_LIMITS: Record<PlanType, PlanLimits> = {
     webhookEvents: false // No webhooks
   },
   pro: {
-    maxFileSize: 100 * 1024 * 1024, // 100 MB
-    maxFilesAtOnce: 20,
-    maxDailyTasks: -1, // Unlimited
-    maxPagesPerFile: 100, // Maximum 100 pages per file
+    maxFileSize: 200 * 1024 * 1024, // 200 MB
+    maxFilesAtOnce: 10,
+    maxDailyTasks: 50, // 50 tasks per day
+    maxPagesPerFile: -1, // Unlimited pages
     watermark: false,
-    ads: false,
+    ads: false, // No ads for pro users
     priorityQueue: true,
     ocrSupport: true,
-    aiAssist: true,
     apiAccess: false,
     whiteLabel: false,
     
     // New features
     cloudIntegrations: true, // Google Drive, Dropbox, OneDrive
-    fileRetention: 7, // 7 days
+    fileRetention: 0, // Instant deletion (0 days) - privacy first
     multiLanguageOCR: true, // English + 10 major languages
-    fileHistory: 20, // Last 20 processed files
-    versioning: true, // Save multiple versions
+    fileHistory: 0, // No file history - privacy first
+    versioning: false, // No versioning - privacy first
     prioritySupport: true, // Email/ticket support
     teamWorkspace: false, // No team features
     adminDashboard: false, // No admin features
@@ -98,7 +94,7 @@ export const PLAN_LIMITS: Record<PlanType, PlanLimits> = {
     dataResidency: false, // No choice of location
     sla: false, // No SLA guarantee
     customBranding: false, // No custom branding
-    extendedRetention: 0, // No extended retention
+    extendedRetention: 0, // No extended retention - privacy first
     singleSignOn: false, // No SSO
     webhookEvents: false // No webhooks
   }

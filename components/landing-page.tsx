@@ -220,6 +220,65 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
+      {/* Simple Pricing Section */}
+      <section className="px-6 py-16 bg-muted/30">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <motion.h2 
+            variants={itemVariants}
+            className="text-3xl font-heading font-semibold text-foreground mb-4"
+          >
+            Simple, transparent pricing
+          </motion.h2>
+          
+          <motion.p
+            variants={itemVariants}
+            className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
+          >
+            Everything available, just usage and file size limits
+          </motion.p>
+          
+          <motion.div
+            variants={itemVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto"
+          >
+            {/* Free Plan */}
+            <div className="bg-background border border-border rounded-xl p-6 text-left">
+              <h3 className="text-xl font-semibold text-foreground mb-2">Free Plan</h3>
+              <div className="text-3xl font-bold text-foreground mb-4">$0</div>
+              <ul className="space-y-2 text-sm text-muted-foreground mb-6">
+                <li>• 5 tasks per day</li>
+                <li>• 20MB file limit</li>
+                <li>• All tools available</li>
+                <li>• Files deleted instantly</li>
+                <li>• Non-intrusive ads</li>
+              </ul>
+              <button className="w-full btn-ghost">Get Started Free</button>
+            </div>
+            
+            {/* Pro Plan */}
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl p-6 text-left">
+              <h3 className="text-xl font-semibold mb-2">Pro Plan</h3>
+              <div className="text-3xl font-bold mb-4">$4.99/month</div>
+              <ul className="space-y-2 text-sm opacity-90 mb-6">
+                <li>• 50 tasks per day</li>
+                <li>• 200MB file limit</li>
+                <li>• Priority processing</li>
+                <li>• No ads</li>
+                <li>• All features unlocked</li>
+              </ul>
+              <button className="w-full bg-white text-blue-600 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors">
+                Start Pro Trial
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
+
       {/* Tray Categories */}
       <section className="px-6 pt-8 pb-20">
         <motion.div

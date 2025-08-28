@@ -19,11 +19,13 @@ import ToolOptions from '@/components/tool-options'
 import EnhancedToolOptions from '@/components/enhanced-tool-options'
 import ActionButtons from '@/components/action-buttons'
 import ResultsPanel from '@/components/results-panel'
+import { useDailyUsage } from '@/lib/hooks/useDailyUsage'
 
 export default function ToolPage() {
   const { data: session } = useSession()
   const { currentTrayId, currentToolId, setView, addJob, addUpload, updateJob, removeJob } = useAppStore()
   const { currentPlan, planLimits, canProcessFile, hasFeature } = usePlanStore()
+  const { canProcessTask, getRemainingTasks, incrementTaskCount } = useDailyUsage()
   const [uploadedFiles, setUploadedFiles] = useState<FileUpload[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const [currentJob, setCurrentJob] = useState<ProcessingJob | null>(null)
@@ -180,6 +182,12 @@ export default function ToolPage() {
   const handleProcess = async () => {
     if (uploadedFiles.length === 0) return
 
+    // Check daily task limits before processing
+    if (!canProcessTask()) {
+      setPlanError(`You've reached your daily limit of ${planLimits.maxDailyTasks} tasks. Please upgrade to Pro for more tasks or try again tomorrow.`)
+      return
+    }
+
     // Check plan limits before processing
     if (!canProcessFile(0, uploadedFiles.length)) {
       setPlanError(`Your ${PLANS[currentPlan].name} plan allows maximum ${planLimits.maxFilesAtOnce} files at once. Please upgrade to process more files.`)
@@ -215,6 +223,9 @@ export default function ToolPage() {
 
     try {
       updateJob(job.id, { status: 'processing', progress: 10 })
+
+      // Increment daily task count
+      incrementTaskCount()
 
       // Call the new API endpoint for processing
       const formData = new FormData()
@@ -416,6 +427,16 @@ export default function ToolPage() {
               </span>
               <span>•</span>
               <span>
+                {planLimits.maxDailyTasks !== -1 && (
+                  <>
+                    <span className="text-green-600 font-medium">
+                      {getRemainingTasks()} remaining today
+                    </span>
+                    <span>•</span>
+                  </>
+                )}
+              </span>
+              <span>
                 Max {planLimits.maxFileSize === -1 ? 'Unlimited' : formatFileSize(planLimits.maxFileSize)} files
               </span>
               <span>•</span>
@@ -463,7 +484,7 @@ export default function ToolPage() {
               <div className="flex items-center space-x-3">
                 <Crown className="h-5 w-5 text-blue-500" />
                 <span className="text-blue-700 text-sm">
-                  Upgrade to Pro for larger files, batch processing, and no watermarks
+                  Upgrade to Pro for 50 tasks/day, 200MB files, priority processing, and no ads
                 </span>
               </div>
               <Link 
